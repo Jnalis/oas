@@ -25,10 +25,6 @@
 
     <link rel="stylesheet" href="{{ asset('backend/assets/mystyle/student_home.css') }}">
 
-
-    <!-- twitter-bootstrap-wizard css -->
-    <link rel="stylesheet" href="{{ asset('backend/assets/libs/twitter-bootstrap-wizard/prettify.css') }}">
-
 </head>
 
 <body>
@@ -53,13 +49,7 @@
     @include('student.components.footer')
     {{-- Footer Ends --}}
 
-    <!-- twitter-bootstrap-wizard js -->
-    <script src="{{ asset('backend/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
-
-    <script src="{{ asset('backend/assets/libs/twitter-bootstrap-wizard/prettify.js') }}"></script>
-
-    <!-- form wizard init -->
-    <script src="{{ asset('backend/assets/js/pages/form-wizard.init.js') }}"></script>
+    @yield('js_wizard')
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
