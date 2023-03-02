@@ -1,7 +1,7 @@
-@extends('admin.layouts.admin_msater')
+@extends('student.layouts.student_msater')
 @section('title', 'Application Details')
 
-@section('admin')
+@section('student')
 <div class="page-content">
     <div class="container-fluid">
 
@@ -19,7 +19,7 @@
                     <div class="card-body">
 
 
-                        <form action="{{ route('admin.update_application_status') }}" method="post"
+                        <form action="" method="post"
                             class="employee-form">
                             @csrf
                             {{-- campuses and program --}}
@@ -65,7 +65,7 @@
                                             Chose Application Status
                                         </label>
 
-                                        <select class="form-control select2" name="application_status">
+                                        <select class="form-control select2" name="application_status" style="pointer-events: none;">
                                             <option>Select</option>
 
                                             <option value="approved" @if (old('application_status', $application->application_status) === "approved") {{ 'selected' }} @endif>Approved
@@ -82,10 +82,13 @@
                                 <div class="col-md-4">
 
                                     @if ($application->application_status == 'not approved')
-                                    <button type="submit" class="btn btn-danger" style="margin-top: 11%">Not Yet Changed
-                                        Status</button>
+                                    <button type="submit" class="btn btn-danger" style="margin-top: 11%" disabled>
+                                        Not Yet Changed Status
+                                    </button>
                                     @else
-                                    <button type="submit" class="btn btn-success" style="margin-top: 11%">Status Alredy Changed</button>
+                                    <button type="submit" class="btn btn-success" style="margin-top: 11%" disabled>
+                                        Status Alredy Changed
+                                    </button>
                                     @endif
 
                                 </div>

@@ -31,7 +31,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="waves-effect">
+                    <a href="{{ route('student.dashboard') }}" class="waves-effect">
                         <i class="ri-dashboard-line"></i>
                         {{-- <span class="badge rounded-pill bg-success float-end">3</span> --}}
                         <span>Dashboard</span>
@@ -39,33 +39,9 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Application Catts</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li>
-                            <a href="{{ route('admin.application_type.index') }}">
-                                Application Type
-                            </a>
-                        </li>
-                        {{-- <li>
-                            <a href="{{ route('admin.olevel_completion_status.index') }}">
-                                O-Level Completion
-                            </a>
-                        </li> --}}
-                        <li>
-                            <a href="{{ route('admin.campuses.index') }}">
-                                Campuses
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="calendar.html" class=" waves-effect">
+                    <a href="{{ route('student.application') }}" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
-                        <span>Student Application</span>
+                        <span>My Application</span>
                     </a>
                 </li>
 

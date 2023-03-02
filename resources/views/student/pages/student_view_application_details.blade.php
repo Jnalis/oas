@@ -1,9 +1,9 @@
-@extends('admin.layouts.admin_msater')
+@extends('student.layouts.student_msater')
 
 @section('title', 'View Application')
 
 
-@section('admin')
+@section('student')
 <div class="page-content">
     <div class="container-fluid">
         <!-- start page title -->
@@ -15,7 +15,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('admin.dashboard') }}">
+                                <a href="{{ route('student.dashboard') }}">
                                     Dashboard
                                 </a>
                             </li>
@@ -73,7 +73,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.show_application', $info->id) }}"
+                                            <a href="{{ route('student.show_application', $info->id) }}"
                                                 class="btn btn-primary">
                                                 <i class=" ri-eye-line"></i>
                                             </a>

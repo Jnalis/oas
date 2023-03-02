@@ -139,8 +139,16 @@ class AdminController extends Controller
     public function view_application_details()
     {
 
-        $application = ApplicationDetails::join('campuses', 'campuses.id', '=', 'application_details.campuses_name')
-            ->join('application_types', 'application_types.id', '=', 'application_details.campuses_name')->get();
+        $application = ApplicationDetails::select([
+            'application_details.id',
+            'application_details.reg_no',
+            'application_details.application_status',
+            'campuses.campuses_name',
+            'application_types.application_type'
+        ])
+            ->leftJoin('campuses', 'campuses.id', '=', 'application_details.campuses_name')
+            ->leftJoin('application_types', 'application_types.id', '=', 'application_details.campuses_name')
+            ->get();
 
         return view('admin.admin_view_application_details', compact('application'));
     }
@@ -149,11 +157,73 @@ class AdminController extends Controller
     public function show_application_details($id)
     {
 
-       return $application = PersonalInformation::join('application_details', 'application_details.personal_id', '=', 'personal_information.id')->find($id);
-
-        $application = ApplicationDetails::join('personal_information', 'personal_information.id', '=',)
+        $application = PersonalInformation::select([
+            'personal_information.id',
+            'personal_information.first_name',
+            'personal_information.middle_name',
+            'personal_information.surname',
+            'personal_information.gender',
+            'personal_information.dob',
+            'personal_information.place_of_birth',
+            'application_details.reg_no',
+            'application_details.application_status',
+            'campuses.campuses_name',
+            'application_types.application_type',
+            'addresses.pobox',
+            'addresses.town_city',
+            'addresses.district',
+            'addresses.region',
+            'addresses.country',
+            'addresses.phone_no',
+            'addresses.email',
+            'next_of_kin.name_kin',
+            'next_of_kin.phone_kin',
+            'next_of_kin.relationship_kin',
+            'next_of_kin.district_kin',
+            'next_of_kin.town_city_kin',
+            'applicant_details.current_work_place',
+            'applicant_details.position_title',
+            'applicant_details.ward',
+            'applicant_details.district_council',
+            'applicant_details.region_applicant',
+            'applicant_details.appointment_years',
+            'applicant_details.employer_phone',
+            'education_backgrounds.primary_school_name',
+            'education_backgrounds.level_of_education',
+            'education_backgrounds.award',
+            'education_backgrounds.year_completed',
+            'education_backgrounds.index_number',
+            'education_backgrounds.examination_center',
+            'education_backgrounds.remarks',
+            'college_institution_backgrounds.name_of_college',
+            'college_institution_backgrounds.certificate_index_number',
+            'college_institution_backgrounds.year_completed_college',
+            'college_institution_backgrounds.course_attended',
+            'college_institution_backgrounds.award_college'
+        ])
+            ->join('application_details', 'application_details.personal_id', '=', 'personal_information.id')
             ->join('campuses', 'campuses.id', '=', 'application_details.campuses_name')
-            ->join('application_types', 'application_types.id', '=', 'application_details.campuses_name')->find($id);
+            ->join('application_types', 'application_types.id', '=', 'application_details.application_type')
+            ->join('addresses', 'addresses.personal_id', '=', 'personal_information.id')
+            ->join('next_of_kin', 'next_of_kin.personal_id', '=', 'personal_information.id')
+            ->join('applicant_details', 'applicant_details.personal_id', '=', 'personal_information.id')
+            ->join('education_backgrounds', 'education_backgrounds.personal_id', '=', 'personal_information.id')
+            ->join('college_institution_backgrounds', 'college_institution_backgrounds.personal_id', '=', 'personal_information.id')
+            ->find($id);
+
+
         return view('admin.admin_show_application', compact('application'));
+    }
+
+    public function change_application_status(Request $request){
+
+        // return $request->all();
+        $application_update = ApplicationDetails::where('personal_id', $request->id)->first();
+        $application_update->application_status = $request->application_status;
+
+        $application_update->save();
+
+        return redirect()->route('admin.application');
+
     }
 }

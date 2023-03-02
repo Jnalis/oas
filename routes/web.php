@@ -36,6 +36,7 @@ Route::controller(AdminController::class)->middleware(['auth'])->group(function 
 
     Route::get('admin/show/applications/{id}', 'show_application_details')->name('admin.show_application');
 
+    Route::post('admin/change/application-status', 'change_application_status')->name('admin.update_application_status');
 });
 
 
@@ -60,7 +61,8 @@ Route::prefix('student')->as('student.')->group(function () {
     Route::resource('application', ApplicationController::class);
 
     Route::get('dashboard', [HomeStudentController::class, 'after_login'])->name('dashboard');
+
+    Route::get('applications', [HomeStudentController::class, 'view_application_details'])->name('application');
+
+    Route::get('show/applications/{id}', [HomeStudentController::class, 'show_application_details'])->name('show_application');
 });
-
-
-

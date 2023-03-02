@@ -9,7 +9,7 @@
     <meta content="Online Student Application" name="description" />
     <meta content="Online Student Application" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('backend/assets/images/fav.png') }}">
 
     <!-- jquery.vectormap css -->
     <link href="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"

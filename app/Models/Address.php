@@ -17,6 +17,5 @@ class Address extends Model
         'country',
         'phone_no',
         'email',
-
     ];
 }
