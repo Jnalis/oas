@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplicationDetails;
 use App\Models\ApplicationType;
 use App\Models\Campuses;
 use App\Models\LocationNACTE;
@@ -18,7 +19,12 @@ class AdminController extends Controller
         // return 'test';
         $application_type = ApplicationType::all();
         $campuses = Campuses::all();
-        return view('admin.index', compact('application_type', 'campuses'));
+        $applications = ApplicationDetails::all();
+        return view('admin.index', compact(
+            'application_type',
+            'campuses',
+            'applications',
+        ));
     }
 
     // Method for LOGOUT
@@ -35,7 +41,7 @@ class AdminController extends Controller
             'alert-type' => 'info',
         );
 
-        return redirect('/login')->with($notification);
+        return redirect('/student')->with($notification);
     } // END METHOD
 
 

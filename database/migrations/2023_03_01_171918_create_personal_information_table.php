@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('level_completions', function (Blueprint $table) {
+        Schema::create('personal_information', function (Blueprint $table) {
             $table->id();
-            $table->string('level_completion_status');
+            $table->string('first_name');
+            $table->string('middle_name');
+            $table->string('surname');
+            $table->string('gender');
+            $table->date('dob');
+            $table->string('place_of_birth');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('level_completions');
+        Schema::dropIfExists('personal_information');
     }
 };

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationTypeController;
 use App\Http\Controllers\CampusesController;
 use App\Http\Controllers\HomeStudentController;
@@ -15,7 +16,7 @@ require __DIR__ . '/auth.php';
 
 
 // Admin all route starts here
-Route::controller(AdminController::class)->middleware(['auth', 'verified'])->group(function () {
+Route::controller(AdminController::class)->middleware(['auth'])->group(function () {
 
     Route::get('admin/logout', 'destroy')->name('admin.logout');
 
@@ -34,7 +35,7 @@ Route::controller(AdminController::class)->middleware(['auth', 'verified'])->gro
 });
 
 
-Route::prefix('admin')->as('admin.')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     Route::resource('application_type', ApplicationTypeController::class);
 
@@ -44,18 +45,18 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'verified'])->group(fu
 });
 
 
-Route::get('/', [HomeStudentController::class, 'index'])->name('student.home');
-Route::get('student/application/form', [HomeStudentController::class, 'apply_form'])->name('student.apply_form');
 
-// Route::prefix('student')->as('student.')->middleware(['auth', 'verified'])->group(function () {
 
-//     Route::resource('application_type', ApplicationTypeController::class);
+Route::prefix('student')->as('student.')->group(function () {
 
-//     Route::resource('olevel_completion_status', OlevelCompletionController::class);
+    Route::get('/', [HomeStudentController::class, 'index'])->name('home');
 
-//     Route::resource('campuses', CampusesController::class);
-// });
+    Route::get('application/form', [HomeStudentController::class, 'apply_form'])->name('apply_form');
 
+    Route::resource('application', ApplicationController::class);
+
+    Route::get('dashboard', [HomeStudentController::class, 'after_login'])->name('dashboard');
+});
 
 
 

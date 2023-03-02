@@ -23,10 +23,12 @@
     {{-- Start Toastr --}}
     <link href="{{ asset('backend/plugins/toastr.css') }}" rel="stylesheet" />
 
+    <link rel="stylesheet" href="{{ asset('backend/assets/mystyle/student_home.css') }}">
+
 </head>
 
-<body class="auth-body-bg">
-    <div class="bg-overlay"></div>
+<body>
+    <div class="bg-overlay-2"></div>
     <div class="wrapper-page">
         <div class="container-fluid p-0">
             <div class="card">
@@ -82,10 +84,10 @@
                                     <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot
                                         your password?</a>
                                 </div>
-                                <div class="col-sm-5 mt-3">
+                                {{-- <div class="col-sm-5 mt-3">
                                     <a href="{{ route('register') }}" class="text-muted"><i
                                             class="mdi mdi-account-circle"></i> Create an account</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                     </div>

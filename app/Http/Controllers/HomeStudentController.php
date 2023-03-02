@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplicationType;
+use App\Models\Campuses;
 use Illuminate\Http\Request;
 
 class HomeStudentController extends Controller
@@ -14,6 +16,17 @@ class HomeStudentController extends Controller
     }
 
     public function apply_form(){
-        return view('student.pages.application');
+
+        $campuses = Campuses::all();
+
+        $application = ApplicationType::all();
+
+        return view('student.pages.application', compact('campuses', 'application'));
+    }
+
+
+    // after login
+    public function after_login(){
+        return view('student.pages.index');
     }
 }

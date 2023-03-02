@@ -12,8 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
-        type="text/css">
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Icons Css -->
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
     <!-- App Css-->
@@ -25,10 +24,14 @@
 
     <link rel="stylesheet" href="{{ asset('backend/assets/mystyle/student_home.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('backend/assets/test/bootstrap.min.css') }}">
+
+    <link href="{{ asset('assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+
+    @yield('css_wizard')
 </head>
 
 <body>
-    @yield('css_wizard')
     {{-- Footer start --}}
     @include('student.components.header')
     {{-- Footer Ends --}}
@@ -49,7 +52,6 @@
     @include('student.components.footer')
     {{-- Footer Ends --}}
 
-    @yield('js_wizard')
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
@@ -59,6 +61,11 @@
     <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
 
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+
+    {{-- <script src="{{ asset('backend/assets/test/parsley.min.js') }}"></script> --}}
+
+    <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
 
 
     {{-- Starts Toastr --}}
@@ -80,12 +87,14 @@
            break;
 
            case 'error':
-           toastr.error(" {{ Session::get('message') }} ");
-           break;
-        }
-        @endif
+               toastr.error(" {{ Session::get('message') }} ");
+               break;
+            }
+            @endif
     </script>
     {{-- End Toastr --}}
+
+    @yield('js_wizard')
 
 </body>
 
