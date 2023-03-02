@@ -22,6 +22,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('campuses_name');
             $table->unsignedBigInteger('application_type');
+            $table->enum('application_status', ['approved', 'not approved'])->default('not approved');
+
 
 
             $table->foreign('personal_id')

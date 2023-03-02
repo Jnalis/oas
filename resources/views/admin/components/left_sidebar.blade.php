@@ -63,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="calendar.html" class=" waves-effect">
+                    <a href="{{ route('admin.application') }}" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
                         <span>Student Application</span>
                     </a>

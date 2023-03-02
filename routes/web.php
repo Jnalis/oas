@@ -32,6 +32,10 @@ Route::controller(AdminController::class)->middleware(['auth'])->group(function 
 
     Route::post('admin/update/password', 'update_password')->name('admin.update_password');
 
+    Route::get('admin/applications', 'view_application_details')->name('admin.application');
+
+    Route::get('admin/show/applications/{id}', 'show_application_details')->name('admin.show_application');
+
 });
 
 

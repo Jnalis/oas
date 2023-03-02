@@ -6,6 +6,7 @@ use App\Models\ApplicationDetails;
 use App\Models\ApplicationType;
 use App\Models\Campuses;
 use App\Models\LocationNACTE;
+use App\Models\PersonalInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -132,4 +133,27 @@ class AdminController extends Controller
     }
     //Edn method
 
+
+
+    //view application
+    public function view_application_details()
+    {
+
+        $application = ApplicationDetails::join('campuses', 'campuses.id', '=', 'application_details.campuses_name')
+            ->join('application_types', 'application_types.id', '=', 'application_details.campuses_name')->get();
+
+        return view('admin.admin_view_application_details', compact('application'));
+    }
+
+    //show all info about application
+    public function show_application_details($id)
+    {
+
+       return $application = PersonalInformation::join('application_details', 'application_details.personal_id', '=', 'personal_information.id')->find($id);
+
+        $application = ApplicationDetails::join('personal_information', 'personal_information.id', '=',)
+            ->join('campuses', 'campuses.id', '=', 'application_details.campuses_name')
+            ->join('application_types', 'application_types.id', '=', 'application_details.campuses_name')->find($id);
+        return view('admin.admin_show_application', compact('application'));
+    }
 }
