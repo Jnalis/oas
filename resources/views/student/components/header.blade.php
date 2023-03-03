@@ -1,33 +1,18 @@
-<header class="header-2">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="navbar-brand-box">
+<div id="header_div">
 
-                    <a href="" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="{{ asset('logo/logo.png') }}" height="50" width="50">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="{{ asset('logo/logo.png') }}" height="50" width="50">
-                        </span>
-                    </a>
-                </div>
+    <nav class="navbar navbar-static-top" role="navigation">
+
+        <div id="header_logo">
+            <img src="{{ asset('logo/logo.png') }}">
+        </div>
+        <div id="header_content">
+            <div id="header_content_college">
+                AGENCY FOR THE DEVELOPMENT OF EDUCATIONAL MANAGEMENT [ADEM]
             </div>
-            <div class="col-md-12">
-                <div class="text-center" style="color: white">
-                    <h1 style="color: white; font-size: 20px;">
-                        THE UNITED REPUBLIC OF TANZANIA
-                        <br>
-                        MINISTRY OF EDUCATION, SCIENCE AND TECHNOLOGY
-                        <br>
-                        AGENCY FOR THE DEVELOPMENT OF EDUCATIONAL MANAGEMENT (ADEM)
-                    </h1>
-
-
-
-                </div>
+            <div id="header_content_sims">
+                ONLINE APPLICATION SYSTEM
             </div>
         </div>
-    </div>
-</header>
+        <div style="clear: both;"></div>
+    </nav>
+</div>

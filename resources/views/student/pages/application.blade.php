@@ -25,13 +25,13 @@
 @section('content')
 
 
-<div class="container-fluid" style=" margin-top: 120px; color: #000;">
+<div class="container-fluid" id="home">
 
 
-    <div class="col-lg-12 text-center">
+    {{-- <div class="col-lg-12 text-center">
         <h1>APPLICATION PROCESS</h1>
         <hr>
-    </div>
+    </div> --}}
 
 
     <div class="row">

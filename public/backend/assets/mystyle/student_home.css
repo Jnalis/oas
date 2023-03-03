@@ -1,17 +1,5 @@
 body {
-    background-color: white !important;
-}
-
-.bg-overlay-2 {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    top: 0;
-    opacity: 0.7;
-    background-color: #00000036;
+    background-color: #cccccc !important;
 }
 
 .wrapper-page-2 {
@@ -20,32 +8,78 @@ body {
     position: relative;
 }
 
-/* .footer-2 {
-    padding: 10px;
-    border-top: 1px solid black;
-} */
+
 
 .footer-2 {
     bottom: 0;
-    padding: 20px calc(24px / 2);
-    position: absolute;
+    padding: 10px;
+    position: fixed;
     left: 0;
-    color: #919bae;
     right: 0;
-    height: 70px;
-    background-color: #161c2b;
+    height: 50px;
+    background-color: #8CAEC7 !important;
 }
 
-.header-2 {
-    top: 0;
-    padding: 20px calc(24px / 2);
-    position: absolute;
-    left: 0;
-    color: #919bae;
-    right: 0;
-    max-height: 100px;
-    background-color: #161c2b;
+#footer-content {
+    font-weight: bolder;
 }
+
+
+
+
+#header_div {
+    height: 100px;
+    background-color: #8CAEC7 !important;
+    background: #8CAEC7 !important;
+    overflow: hidden;
+}
+
+#header_div .navbar,
+#header_div .navbar .navbar-static-top {
+    height: 80px;
+    background-color: #8CAEC7 !important;
+    background: #8CAEC7 !important;
+    color: #fff;
+}
+
+#header_logo {
+    width: 100px;
+    float: left;
+    margin-left: 100px;
+}
+
+#header_logo img {
+    width: 75px;
+    height: 85px;
+}
+
+#header_content {
+    float: left;
+    width: 80%;
+    padding-top: 5px;
+}
+
+#header_content_college {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#header_content_sims {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+
+#home {
+    margin-top: -80px;
+    top: 0;
+}
+
+
+
+
+
 
 .back_login {
     margin-left: 10%;
@@ -54,19 +88,3 @@ body {
 .apply_form_bold {
     font-weight: bolder;
 }
-fieldset.scheduler-border {
-    border: 1px groove #ddd !important;
-    padding: 0 1.4em 1.4em 1.4em !important;
-    margin: 0 0 1.5em 0 !important;
-    -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
-}
-
-    legend.scheduler-border {
-        font-size: 1.2em !important;
-        font-weight: bold !important;
-        text-align: left !important;
-        width:auto;
-        padding:0 10px;
-        border-bottom:none;
-    }

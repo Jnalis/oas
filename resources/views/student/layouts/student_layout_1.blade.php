@@ -32,17 +32,14 @@
 </head>
 
 <body>
-    {{-- Footer start --}}
-    @include('student.components.header')
-    {{-- Footer Ends --}}
 
-    <div class="bg-overlay-2"></div>
+    {{-- Header start --}}
+    @include('student.components.header')
+    {{-- Header Ends --}}
 
     <div class="wrapper-page-2">
 
-
         @yield('content')
-
 
     </div>
     <!-- end -->

@@ -2,7 +2,7 @@
 @section('title', 'Student | OAS')
 
 @section('content')
-<div class="row container-fluid" style=" margin-top: 150px; margin-bottom: 150px;  ">
+<div class="row container-fluid" id="home">
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
