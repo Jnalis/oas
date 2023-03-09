@@ -10,6 +10,7 @@ class CollegeInstitutionBackground extends Model
     use HasFactory;
 
     protected $fillable = [
+        'personal_id',
         'name_of_college',
         'certificate_index_number',
         'year_completed_college',

@@ -10,6 +10,7 @@ class NextOfKin extends Model
     use HasFactory;
 
     protected $fillable = [
+        'personal_id',
         'name_kin',
         'phone_kin',
         'relationship_kin',

@@ -6,19 +6,23 @@ use App\Models\ApplicationDetails;
 use App\Models\ApplicationType;
 use App\Models\Campuses;
 use App\Models\PersonalInformation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeStudentController extends Controller
 {
     //
 
-    public function index (){
+    public function index()
+    {
 
         return view('student.pages.home');
     }
 
-    public function apply_form(){
+    public function apply_form()
+    {
 
         $campuses = Campuses::all();
 
@@ -28,8 +32,67 @@ class HomeStudentController extends Controller
     }
 
 
+
+    public function apply_form_submit(Request $request)
+    {
+
+        $request->validate([
+            'campuses_name' => 'required',
+            'application_type' => 'required',
+            'first_name' => 'required',
+            'surname' => 'required',
+        ]);
+
+        if ($request->index_number != null) {
+            $index_no = $request->index_number;
+        } else {
+            $index_no = $request->eq_number;
+        }
+
+        // return strtoupper($request->surname);
+
+        $personal_info = new PersonalInformation();
+        $personal_info->first_name = $request->first_name;
+        $personal_info->middle_name = $request->middle_name;
+        $personal_info->surname = $request->surname;
+        $personal_info->save();
+
+
+        $last_personal_id = PersonalInformation::latest()->first();
+        $last_inserted_id = $last_personal_id->id;
+
+        $application = new ApplicationDetails();
+
+        // $year = date("Y");
+        // $numbers = rand(1, 999);
+        // $reg_no = 'ADEM/' . $year . '/' . $numbers;
+        $application->index_no = $index_no;
+        $application->personal_id = $last_inserted_id;
+        $application->campuses_name = $request->campuses_name;
+        $application->application_type = $request->application_type;
+        $application->save();
+
+        $user = new User();
+        $user->name = $request->first_name . ' ' . $request->middle_name . ' ' . $request->surname;
+        $user->email = null;
+        $user->username = $index_no;
+        $user->password = Hash::make(strtoupper($request->surname));
+        $user->save();
+
+        $notification = array(
+            'message' => 'Successfully Registered but temporary please login to finish the process',
+            'alert-type' => 'success',
+        );
+
+
+        return redirect()->route('student.home')->with($notification);
+    }
+
+
     // after login
-    public function after_login(){
+    public function after_login()
+    {
+        
         return view('student.pages.index');
     }
 

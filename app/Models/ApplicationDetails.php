@@ -11,5 +11,6 @@ class ApplicationDetails extends Model
 
     protected $fillable = [
         'reg_no',
+        'index_no',
     ];
 }

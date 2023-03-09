@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('personal_information', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('surname');
-            $table->string('gender');
-            $table->date('dob');
-            $table->string('place_of_birth');
+            $table->string('first_name')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('place_of_birth')->nullable();
             $table->timestamps();
         });
     }

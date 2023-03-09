@@ -10,6 +10,7 @@ class ApplicantDetails extends Model
     use HasFactory;
 
     protected $fillable = [
+        'personal_id',
         'current_work_place',
         'position_title',
         'ward',

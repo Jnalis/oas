@@ -18,11 +18,13 @@ return new class extends Migration
 
             $table->unsignedBigInteger('personal_id');
 
+            $table->string('index_no')->unique()->nullable();
+
             $table->string('reg_no')->unique()->nullable();
 
             $table->unsignedBigInteger('campuses_name');
             $table->unsignedBigInteger('application_type');
-            $table->enum('application_status', ['approved', 'not approved'])->default('not approved');
+            $table->enum('application_status', ['approved', 'not approved', 'temporally'])->default('temporally');
 
 
 

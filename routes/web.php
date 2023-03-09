@@ -5,8 +5,6 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationTypeController;
 use App\Http\Controllers\CampusesController;
 use App\Http\Controllers\HomeStudentController;
-use App\Http\Controllers\NACTE_LocationController;
-use App\Http\Controllers\OlevelCompletionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,21 +42,28 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     Route::resource('application_type', ApplicationTypeController::class);
 
-    Route::resource('olevel_completion_status', OlevelCompletionController::class);
-
     Route::resource('campuses', CampusesController::class);
 });
 
 
 
 
-Route::prefix('student')->as('student.')->group(function () {
 
-    Route::get('/', [HomeStudentController::class, 'index'])->name('home');
 
-    Route::get('application/form', [HomeStudentController::class, 'apply_form'])->name('apply_form');
 
-    Route::resource('application', ApplicationController::class);
+Route::get('/', [HomeStudentController::class, 'index'])->name('home');
+
+Route::get('student/application/form', [HomeStudentController::class, 'apply_form'])->name('student.apply_form');
+Route::post('student/application/form/submit', [HomeStudentController::class, 'apply_form_submit'])->name('student.apply_form_submit');
+
+
+
+
+
+Route::prefix('student')->as('student.')->middleware(['auth'])->group(function () {
+
+
+    // Route::resource('application', ApplicationController::class);
 
     Route::get('dashboard', [HomeStudentController::class, 'after_login'])->name('dashboard');
 

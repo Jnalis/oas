@@ -8,7 +8,7 @@
             <div class="card-body">
 
 
-                <div style="color: #000; font-size: 14px;">
+                <div>
                     <h3>Welcome to ADEM – Online Application System (OAS)</h3>
                     <br>
                     <h6>

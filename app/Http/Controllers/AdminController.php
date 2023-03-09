@@ -42,7 +42,7 @@ class AdminController extends Controller
             'alert-type' => 'info',
         );
 
-        return redirect('/student')->with($notification);
+        return redirect('/')->with($notification);
     } // END METHOD
 
 

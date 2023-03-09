@@ -76,7 +76,10 @@ body {
     top: 0;
 }
 
-
+#application_tips {
+    border-top: solid #8caec7 5px;
+    border-radius: 10px;
+}
 
 
 
