@@ -5,6 +5,11 @@
         @php
         $id = Auth::user()->id;
         $adminData = App\Models\User::find($id);
+
+        $app_status = App\Models\ApplicationDetails::firstWhere('index_no',$adminData->username)->application_status;
+
+
+
         @endphp
 
         <!-- Starts User details -->
@@ -39,10 +44,31 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('student.profile') }}" class="waves-effect">
+                        <i class="ri-dashboard-line"></i>
+                        {{-- <span class="badge rounded-pill bg-success float-end">3</span> --}}
+                        <span>My Profile</span>
+                    </a>
+                </li>
+
+                <li>
+
+                    @if ( $app_status == 'temporally' )
+                    <a href="{{ route('student.dashboard') }}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>My Application</span>
+                    </a>
+                    @elseif ( $app_status == 'not approved' )
+                    <a href="{{ route('student.dashboard') }}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>My Application</span>
+                    </a>
+                    @else
                     <a href="{{ route('student.application') }}" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
                         <span>My Application</span>
                     </a>
+                    @endif
                 </li>
 
 

@@ -34,10 +34,10 @@
 <body>
 
     {{-- Header start --}}
-    @include('student.components.header')
     {{-- Header Ends --}}
 
     <div class="wrapper-page-2">
+        @include('student.components.header')
 
         @yield('content')
 

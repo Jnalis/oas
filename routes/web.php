@@ -11,6 +11,30 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
+// This route is used for login
+Route::get('/', [HomeStudentController::class, 'index'])->name('home');
+
+//this routes are used by student
+Route::get('student/application/form', [HomeStudentController::class, 'apply_form'])->name('student.apply_form');
+Route::post('student/application/form/submit', [HomeStudentController::class, 'apply_form_submit'])->name('student.apply_form_submit');
+
+
+
+
+// Students routes
+Route::prefix('student')->as('student.')->middleware(['auth'])->group(function () {
+
+    // Route::resource('application', ApplicationController::class);
+
+    Route::get('dashboard', [HomeStudentController::class, 'after_login'])->name('dashboard');
+
+    Route::get('profile', [HomeStudentController::class, 'view_profile'])->name('profile');
+
+    Route::get('applications', [HomeStudentController::class, 'view_application_details'])->name('application');
+
+    Route::get('show/applications/{id}', [HomeStudentController::class, 'show_application_details'])->name('show_application');
+});
+
 
 
 // Admin all route starts here
@@ -43,31 +67,4 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('application_type', ApplicationTypeController::class);
 
     Route::resource('campuses', CampusesController::class);
-});
-
-
-
-
-
-
-
-Route::get('/', [HomeStudentController::class, 'index'])->name('home');
-
-Route::get('student/application/form', [HomeStudentController::class, 'apply_form'])->name('student.apply_form');
-Route::post('student/application/form/submit', [HomeStudentController::class, 'apply_form_submit'])->name('student.apply_form_submit');
-
-
-
-
-
-Route::prefix('student')->as('student.')->middleware(['auth'])->group(function () {
-
-
-    // Route::resource('application', ApplicationController::class);
-
-    Route::get('dashboard', [HomeStudentController::class, 'after_login'])->name('dashboard');
-
-    Route::get('applications', [HomeStudentController::class, 'view_application_details'])->name('application');
-
-    Route::get('show/applications/{id}', [HomeStudentController::class, 'show_application_details'])->name('show_application');
 });

@@ -60,7 +60,14 @@ class MultiStepForm extends Component
     public $award_college;
 
 
-    public $totalSteps = 7;
+    public $educations;
+    public $education;
+
+
+
+
+
+    public $totalSteps = 6;
     public $currentStep = 1;
 
     public $student_id;
@@ -98,7 +105,11 @@ class MultiStepForm extends Component
         $this->middle_name = $this->personal_details->middle_name;
         $this->surname = $this->personal_details->surname;
 
+        // index number
         $this->index_number = $this->student_id;
+
+
+        $this->educations = EducationBackground::all();
 
         // dd($this->personal_details);
 
@@ -144,13 +155,14 @@ class MultiStepForm extends Component
     public function validateData()
     {
         //
-        if ($this->currentStep == 1) {
+        // if ($this->currentStep == 1) {
 
-            $this->validate([
-                'campuses_name' => 'required',
-                'application_type' => 'required',
-            ]);
-        } elseif ($this->currentStep == 2) {
+        //     $this->validate([
+        //         'campuses_name' => 'required',
+        //         'application_type' => 'required',
+        //     ]);
+        // } else
+        if ($this->currentStep == 1) {
 
             $this->validate([
                 'first_name' => 'required|string',
@@ -160,7 +172,7 @@ class MultiStepForm extends Component
                 'dob' => 'required|date',
                 'place_of_birth' => 'required|string',
             ]);
-        } elseif ($this->currentStep == 3) {
+        } elseif ($this->currentStep == 2) {
 
             $this->validate([
                 // pobox
@@ -171,48 +183,92 @@ class MultiStepForm extends Component
                 'phone_no' => 'required|string|unique:addresses',
                 // email
             ]);
-        } elseif ($this->currentStep == 4) {
+        } elseif ($this->currentStep == 3) {
 
             $this->validate([
                 'name_kin' => 'required|string',
                 'phone_kin' => 'required|string',
                 'relationship_kin' => 'required|string',
-                // district_kin
-                // town_city_kin
+                'district_kin' => 'required|string',
+                'town_city_kin' => 'required|string',
+            ]);
+        }
+        elseif ($this->currentStep == 4) {
+
+            $this->validate([
+                'current_work_place' => 'required|string',
+                'position_title' => 'required|string',
+                'ward' => 'required|string',
+                'district_council' => 'required|string',
+                'region_applicant' => 'required|string',
+                'appointment_years' => 'required|string',
+                'employer_phone' => 'required|string',
             ]);
         }
         // elseif ($this->currentStep == 5) {
 
         //     $this->validate([
-        //         'current_work_place' => 'required',
-        //         'position_title' => 'required',
-        //         'ward' => 'required',
-        //         'district_council' => 'required',
-        //         'region_applicant' => 'required',
-        //         'appointment_years' => 'required',
-        //         'employer_phone' => 'required',
+        //         'primary_school_name' => 'required|string',
+        //         'level_of_education' => 'required|string',
+        //         'award' => 'required|string',
+        //         'year_completed' => 'required|date',
+        //         'index_number' => 'required|string',
+        //         'examination_center' => 'required|string',
+        //         'remarks' => 'required|string',
         //     ]);
         // }
-        elseif ($this->currentStep == 6) {
-
-            $this->validate([
-                'primary_school_name' => 'required|string',
-                'level_of_education' => 'required|string',
-                'award' => 'required|string',
-                'year_completed' => 'required|date',
-                'index_number' => 'required|string',
-                'examination_center' => 'required|string',
-                'remarks' => 'required|string',
-            ]);
-        }
     }
+
+
+
+    public function add_education(){
+
+        $this->educations->push(new EducationBackground());
+
+    }
+    public function delete($index){
+
+        $education = $this->educations[$index];
+        $this->educations->forget($index);
+
+        $education->delete();
+    }
+
+
+
 
     public function register()
     {
         //
-        // dd($this->personal_id_from_db);
+        foreach ($this->education as $ed) {
 
-        if ($this->currentStep == 7) {
+            foreach($ed as $e){
+                dd($e);
+            }
+
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if ($this->currentStep == 6) {
 
             $this->validate([
                 'name_of_college' => 'required|string',
@@ -293,26 +349,16 @@ class MultiStepForm extends Component
             ]
         );
 
-        ApplicationDetails::whereId($this->personal_id_from_db)->update(
+        ApplicationDetails::where('personal_id', $this->personal_id_from_db)->update(
             [
 
                 'application_status' => 'not approved',
             ]
         );
 
-        // PersonalInformation::update($values_personal_info)->where('id', $this->personal_id_from_db);
-        // Address::insert($values_address_working_address);
-        // NextOfKin::insert($values_next_of_kin);
-        // ApplicantDetails::insert($values_applicant_details);
-        // EducationBackground::insert($values_education_background);
-        // CollegeInstitutionBackground::insert($values_education_background_college);
-        // ApplicationDetails::update($value_application_detail)->where('index_no', $this->student_id = Auth::user()->username);
 
         session()->flash('message', 'Profile Updated Successfully');
 
         return redirect()->route('student.dashboard');
-
-
-        // dd($values_personal_info, $values_address_working_address, $values_next_of_kin, $values_applicant_details, $values_education_background, $values_education_background, $value_application_detail);
     }
 }

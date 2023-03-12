@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplicantDetails;
 use App\Models\ApplicationDetails;
 use App\Models\ApplicationType;
 use App\Models\Campuses;
+use App\Models\NextOfKin;
 use App\Models\PersonalInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -85,15 +87,56 @@ class HomeStudentController extends Controller
         );
 
 
-        return redirect()->route('student.home')->with($notification);
+        return redirect()->route('home')->with($notification);
     }
 
 
     // after login
     public function after_login()
     {
-        
-        return view('student.pages.index');
+
+        $student_id = Auth::user()->username;
+        $application_status = ApplicationDetails::firstWhere('index_no', $student_id)->application_status;
+
+        return view('student.pages.index', compact('application_status'));
+    }
+
+    //function to view student profile
+    public function view_profile()
+    {
+        //
+        $index_no = Auth()->user()->username;
+
+        $personal_id = ApplicationDetails::firstWhere('index_no', $index_no)->personal_id;
+
+        $personal_info = PersonalInformation::select([
+            'personal_information.id',
+            'personal_information.first_name',
+            'personal_information.middle_name',
+            'personal_information.surname',
+            'personal_information.gender',
+            'personal_information.dob',
+            'personal_information.place_of_birth',
+            'addresses.pobox',
+            'addresses.town_city',
+            'addresses.district',
+            'addresses.region',
+            'addresses.country',
+            'addresses.phone_no',
+            'addresses.email'
+        ])
+            ->join('addresses', 'addresses.personal_id', '=', 'personal_information.id')
+            ->find($personal_id);
+
+        $student_kin_info = NextOfKin::where('personal_id', $personal_id)->get();
+
+        $student_working_info = ApplicantDetails::where('personal_id', $personal_id)->get();
+
+        return view('student.pages.student_view_profile', compact(
+            'personal_info',
+            'student_kin_info',
+            'student_working_info',
+        ));
     }
 
 
